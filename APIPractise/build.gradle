@@ -16,6 +16,7 @@ dependencies {
     testImplementation 'org.hamcrest:hamcrest:2.2'
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.12.5'
     implementation group: 'org.json', name: 'json', version: '20210307'
+    testImplementation group: 'io.rest-assured', name: 'rest-assured', version: '4.4.0'
 
 }
 
