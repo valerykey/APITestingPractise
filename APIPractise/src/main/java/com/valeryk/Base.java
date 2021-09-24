@@ -1,12 +1,16 @@
 package com.valeryk;
 
+
 import org.apache.http.HttpEntity;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.util.EntityUtils;
 
-
 public class Base {
+
+    /*public static void setup() {
+        RestAssured.baseURI = "https://restful-booker.herokuapp.com";
+    }*/
 
       public static ResponseHandler<String> getResponse() {
         ResponseHandler<String> responseHandler = response -> {

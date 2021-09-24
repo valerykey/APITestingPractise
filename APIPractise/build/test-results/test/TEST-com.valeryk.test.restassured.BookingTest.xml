@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.valeryk.test.restassured.BookingTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2021-09-24T07:31:50" hostname="EPPLGDAW03D4" time="4.087">
+  <properties/>
+  <testcase name="createBooking()" classname="com.valeryk.test.restassured.BookingTest" time="1.949"/>
+  <testcase name="updateBookingTest()" classname="com.valeryk.test.restassured.BookingTest" time="0.845"/>
+  <testcase name="getBookingTest()" classname="com.valeryk.test.restassured.BookingTest" time="0.659"/>
+  <testcase name="getBookingIDTest()" classname="com.valeryk.test.restassured.BookingTest" time="0.633"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

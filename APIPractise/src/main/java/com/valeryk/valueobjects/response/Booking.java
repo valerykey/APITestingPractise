@@ -12,7 +12,10 @@ public class Booking {
         private BookingDates bookingdates;
         private String additionalneeds;
 
-        private Booking(){}
+        public Booking()
+        {
+                super();
+        }
 
         private Booking(BookingBuilder builder) {
                 this.firstname = builder.firstname;

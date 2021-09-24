@@ -97,20 +97,4 @@ public class HttpWrapper {
     }
 
 
-    public static HttpWrapper prepare(){
-        return new HttpWrapper();
-    }
-    public HttpWrapper getX(String uri){
-        return this;
-    }
-    public HttpWrapper post(Object object){
-        return this;
-    }
-    public HttpWrapper execute(){
-        return this;
-    }
-    public Object getREsponse(){
-        return null;
-    }
-
 }
