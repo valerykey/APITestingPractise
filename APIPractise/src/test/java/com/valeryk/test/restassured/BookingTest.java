@@ -10,6 +10,7 @@ import io.restassured.http.ContentType;
 import io.restassured.http.Cookie;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -31,6 +32,7 @@ public class BookingTest {
         RestAssured.baseURI = "https://restful-booker.herokuapp.com";
     }
 
+    @Tag(value = "rest")
     @Test
     public void getBookingIDTest() {
                  given()
@@ -41,6 +43,7 @@ public class BookingTest {
                 .extract().response();
     }
 
+    @Tag(value = "rest")
     @Test
     public void getBookingTest() {
         Response response = given()
@@ -54,6 +57,7 @@ public class BookingTest {
         assertThat(response.jsonPath().getString("bookingdates"),notNullValue());
     }
 
+    @Tag(value = "rest")
     @Test
     public void createBooking() throws IOException {
 
@@ -71,6 +75,7 @@ public class BookingTest {
         assertThat(response.jsonPath().getString("booking"),notNullValue());
     }
 
+    @Tag(value = "rest")
     @Test
     public void updateBookingTest() throws IOException{
        Booking booking = Data.createBookingObject("Jim", "Brown", 111, true, new BookingDates("2018-01-01", "2019-01-01"), "breakfast");

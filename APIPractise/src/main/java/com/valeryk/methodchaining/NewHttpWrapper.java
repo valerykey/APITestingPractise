@@ -79,11 +79,4 @@ client.execute(request);*/
        return httpClient.execute(request, Base.getResponse());
     }
 
-    /*public NewHttpWrapper post(T t)
-
-    public void getResponse(String responseBody){
-
-       // String responseBody = httpclient.execute(httpGet, Base.getResponse());
-        //return null;
-    }*/
 }

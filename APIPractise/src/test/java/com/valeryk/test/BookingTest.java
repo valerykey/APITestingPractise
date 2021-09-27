@@ -12,6 +12,7 @@ import com.valeryk.valueobjects.response.BookingID;
 import com.valeryk.valueobjects.response.NewBooking;
 import org.apache.http.entity.StringEntity;
 import org.json.JSONObject;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import com.valeryk.valueobjects.response.Booking;
 
@@ -29,6 +30,7 @@ public class BookingTest extends Base {
     final static String FORMAT = "application/json";
     final static String ACCEPT = "Accept";
 
+    @Tag(value = "booking")
     @Test
     public void getBookingIDTest() throws IOException {
         //get all booking ids
@@ -41,6 +43,7 @@ public class BookingTest extends Base {
 
     }
 
+    @Tag(value = "booking")
     @Test
     public void getBookingTest() throws IOException {
         //get booking from id
@@ -54,6 +57,7 @@ public class BookingTest extends Base {
         assertThat(booking.getBookingdates(),notNullValue());
     }
 
+    @Tag(value = "booking")
     @Test
     public void updateBookingTest() throws IOException {
         //update booking
@@ -65,15 +69,9 @@ public class BookingTest extends Base {
                 header("cookie", "token=" + HttpWrapper.generateToken().getToken()).
                 execute());
         assertThat(newBooking.getFirstname(),equalTo("Jim"));
-
-        /*NewBooking booking = HttpWrapper.createBooking();
-        booking.getBooking().setFirstname("John");
-        HttpPut httpPut = HttpWrapper.put(BOOKING_URL + "/" + String.valueOf(booking.getBookingid()), HttpWrapper.generateToken().getToken());
-        httpPut.setEntity(ObjectMapperWrapper.serialize(booking.getBooking()));
-        Booking new_booking = ObjectMapperWrapper.deserialize(Booking.class, httpclient.execute(httpPut, getResponse()));
-        assertThat(new_booking.getFirstname(),equalTo("John"));*/
     }
 
+    @Tag(value = "booking")
     @Test
     public void createBookingTest() throws IOException {
        // NewBooking booking = HttpWrapper.createBooking();
@@ -86,6 +84,7 @@ public class BookingTest extends Base {
         assertThat(newBooking.getBookingid(),notNullValue());
     }
 
+    @Tag(value = "booking")
     @Test
     public void partialUpdateTest() throws IOException {
         JSONObject json = new JSONObject();

@@ -1,9 +1,12 @@
 plugins {
     id 'java'
+    id "io.qameta.allure" version "2.8.0"
 }
 
 group 'org.example'
 version '1.0-SNAPSHOT'
+
+apply plugin: "io.qameta.allure"
 
 repositories {
     mavenCentral()
@@ -17,9 +20,18 @@ dependencies {
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.12.5'
     implementation group: 'org.json', name: 'json', version: '20210307'
     testImplementation group: 'io.rest-assured', name: 'rest-assured', version: '4.4.0'
-
+    implementation group: 'io.qameta.allure', name: 'allure-maven', version: '2.8'
+    testImplementation group: 'io.qameta.allure', name: 'allure-junit5', version: '2.15.0'
 }
 
 test {
-    useJUnitPlatform()
+    useJUnitPlatform{
+        includeTags 'rest'
+    }
+}
+allure {
+    version = '2.8.0'
+    autoconfigure = true;
+   // resultsDir = file('/build/allure-results')
+    //reportDir = file('build/allure-results')
 }
