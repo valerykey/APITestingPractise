@@ -5,18 +5,24 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.valeryk.Base;
 import com.valeryk.HttpWrapper;
 import com.valeryk.ObjectMapperWrapper;
+import com.valeryk.config.ConfigMap;
+import com.valeryk.config.JSONReader;
 import com.valeryk.dataprovider.Data;
 import com.valeryk.methodchaining.NewHttpWrapper;
 import com.valeryk.valueobjects.response.BookingDates;
 import com.valeryk.valueobjects.response.BookingID;
 import com.valeryk.valueobjects.response.NewBooking;
 import org.apache.http.entity.StringEntity;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import com.valeryk.valueobjects.response.Booking;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.SQLOutput;
 import java.util.List;
 
@@ -29,11 +35,15 @@ public class BookingTest extends Base {
     final static String CONTENT = "Content-Type";
     final static String FORMAT = "application/json";
     final static String ACCEPT = "Accept";
+    ConfigMap configMap;
+
+    private static final Logger LOG = LogManager.getLogger(BookingTest.class);
 
     @Tag(value = "booking")
     @Test
     public void getBookingIDTest() throws IOException {
         //get all booking ids
+        LOG.info("Get booking Id test");
         List<BookingID> listBookingId = new ObjectMapper().readValue(
                 NewHttpWrapper.prepare().init().
                         get("/booking").
@@ -47,6 +57,7 @@ public class BookingTest extends Base {
     @Test
     public void getBookingTest() throws IOException {
         //get booking from id
+        LOG.info("Get booking Id test");
         Booking booking = ObjectMapperWrapper.deserialize(
                 Booking.class,
                 NewHttpWrapper.prepare().init().
@@ -61,7 +72,10 @@ public class BookingTest extends Base {
     @Test
     public void updateBookingTest() throws IOException {
         //update booking
-        Booking booking = Data.createBookingObject("Jim", "Brown", 111, true, new BookingDates("2018-01-01", "2019-01-01"), "breakfast");
+        LOG.info("Update booking test");
+        Booking booking= new ObjectMapper().readValue(new File("src/main/resources/booking.json"), Booking.class);
+        configMap = JSONReader.loadJSON("src/main/resources/booking.json");
+        System.out.println(configMap.get(0));
         Booking newBooking = ObjectMapperWrapper.deserialize(Booking.class,
                 NewHttpWrapper.prepare().init().
                 put("/booking/1", ObjectMapperWrapper.serialize(booking)).
@@ -74,8 +88,8 @@ public class BookingTest extends Base {
     @Tag(value = "booking")
     @Test
     public void createBookingTest() throws IOException {
-       // NewBooking booking = HttpWrapper.createBooking();
-        Booking booking = Data.createBookingObject("Jim", "Brown", 111, true, new BookingDates("2018-01-01", "2019-01-01"), "breakfast");
+        LOG.info("Get booking Id test");
+        Booking booking= new ObjectMapper().readValue(new File("src/main/resources/booking.json"), Booking.class);
         NewBooking newBooking = ObjectMapperWrapper.deserialize(NewBooking.class,
                 NewHttpWrapper.prepare().init().
                 post("/booking", ObjectMapperWrapper.serialize(booking)).
@@ -87,6 +101,7 @@ public class BookingTest extends Base {
     @Tag(value = "booking")
     @Test
     public void partialUpdateTest() throws IOException {
+        LOG.info("Get booking Id test");
         JSONObject json = new JSONObject();
         json.put("firstname", "James");
         json.put("lastname", "Brown");
@@ -101,7 +116,7 @@ public class BookingTest extends Base {
 
     @Test
     public void deleteTest() throws IOException {
-
+        LOG.info("Get booking Id test");
         assertThat(NewHttpWrapper.prepare().init().delete("/booking/3").
                 header(CONTENT, FORMAT).
                 header("cookie", "token=" + HttpWrapper.generateToken().getToken()).
@@ -110,6 +125,7 @@ public class BookingTest extends Base {
 
     @Test
     public void pingTest() throws IOException {
+        LOG.info("Get booking Id test");
         assertThat(NewHttpWrapper.prepare().init().get("/ping").execute(), equalTo("Created"));
     }
 
